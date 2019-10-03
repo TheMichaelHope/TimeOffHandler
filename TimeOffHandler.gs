@@ -40,7 +40,7 @@ function sendRequestResults()
       }
       else if (response == 'no') //if denied
       {
-        var message = 'Hello,' + name + '!\n\n' + 'Your request for time off on ' + date + ' from ' + startTime + ' to ' + endTime + ' was not granted.' + '\n\n' + 'Have a good day.';
+        var message = 'Hello,' + name + '!\n\n' + 'Your request for time off on ' + date + ' from ' + ' was not granted.' + '\n\n' + 'Have a good day.';
         var subject = 'Time off Request Not Granted';
         MailApp.sendEmail(emailAddress, subject, message);
         sheet.getRange(startRow, 9).setValue(EMAIL_SENT);
@@ -97,7 +97,7 @@ function sendToCalendar()
           //var eventEnd = new Date( date + " " + eTime);
           //var newTimedEvent = calendar.createEvent(newTitle, eventStart, eventEnd)
           
-          sheet.getRange(startRow,16).setValue(EVENT_CREATED); //mark as created
+          sheet.getRange(startRow + 1, 16).setValue(EVENT_CREATED); //mark as created
         }
         else 
         {
