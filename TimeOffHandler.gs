@@ -68,7 +68,7 @@ function sendToCalendar()
   var dataRange = sheet.getRange("K2:P20"); //can also be expanded
   var data = dataRange.getValues();
   
-  var calendar = CalendarApp.getCalendarById('ckcghealth.com_f3mjdqj3juime7dd23p0ftl82s@group.calendar.google.com') //id of specific Time Off calendar in CKCG calendar
+  var calendar = CalendarApp.getCalendarById('_______________') //id of specific Time Off calendar in CKCG calendar
   
   
   var numValues = 0;
