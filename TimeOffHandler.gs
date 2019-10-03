@@ -40,7 +40,7 @@ function sendRequestResults()
       }
       else if (response == 'no') //if denied
       {
-        var message = 'Hello,' + name + '!\n\n' + 'Your request for time off on ' + date + ' from ' + ' was not granted.' + '\n\n' + 'Have a good day.';
+        var message = 'Hello, ' + name + '!\n\n' + 'Your request for time off on ' + date + ' from ' + ' was not granted.' + '\n\n' + 'Have a good day.';
         var subject = 'Time off Request Not Granted';
         MailApp.sendEmail(emailAddress, subject, message);
         sheet.getRange(startRow, 9).setValue(EMAIL_SENT);
