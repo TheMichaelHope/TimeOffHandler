@@ -14,7 +14,7 @@ function sendRequestResults()
   var dataRange = sheet.getRange("B2:I20"); //can be expanded to more rows as list grows, for now uses 20 rows
   var data = dataRange.getValues();
   
-  for (i in data) //loop through each row in that range
+  for (var i = 0; i < data.length; i++) //loop through each row in that range
   {
     var rowData = data[i]; //each element of data array contains 8 columns of data, from left to right
     var name = rowData[0]; //column B has names
@@ -30,31 +30,21 @@ function sendRequestResults()
     {
       if (response == 'yes') //if approved
       {
-        var message = 'Hello,' + name + '!\n\n' + 'Your request for time off on ' + date + ' from ' + startTime + ' to ' + endTime + ' has been granted.' + '\n\n' + 'In the Google Calendar you will find an all-day event representing your time off. Please modify it to match the time slot you requested. ' + '\n\n' + 'Have a good day.';
+        var message = 'Hello, ' + name + '!\n\n' + 'Your request for time off on ' + date + ' has been granted.' + '\n\n' + 'In the Google Calendar you will find an all-day event representing your time off. Please modify it to match the time slot you requested. ' + '\n\n' + 'Have a good day.';
         var subject = 'Time off Request Granted';
         MailApp.sendEmail(emailAddress, subject, message);
         sheet.getRange(startRow, 9).setValue(EMAIL_SENT);
-        SpreadsheetApp.flush();
-        i++; //increment for loop
-        startRow++; //go to the next row
       }
       else if (response == 'no') //if denied
       {
-        var message = 'Hello, ' + name + '!\n\n' + 'Your request for time off on ' + date + ' from ' + ' was not granted.' + '\n\n' + 'Have a good day.';
+        var message = 'Hello,' + name + '!\n\n' + 'Your request for time off on ' + date + ' was not granted.' + '\n\n' + 'Have a good day.';
         var subject = 'Time off Request Not Granted';
         MailApp.sendEmail(emailAddress, subject, message);
         sheet.getRange(startRow, 9).setValue(EMAIL_SENT);
-        SpreadsheetApp.flush();
-        i++;
-        startRow++;
       }
-      else {}
+      else {startRow++;}
     }
-    else
-    {
-      i++;
-      startRow++;
-    }
+    else{startRow++;}
   }
 }
 
@@ -68,7 +58,7 @@ function sendToCalendar()
   var dataRange = sheet.getRange("K2:P20"); //can also be expanded
   var data = dataRange.getValues();
   
-  var calendar = CalendarApp.getCalendarById('_______________') //id of specific Time Off calendar in CKCG calendar
+  var calendar = CalendarApp.getCalendarById('ckcghealth.com_f3mjdqj3juime7dd23p0ftl82s@group.calendar.google.com') //id of specific Time Off calendar in CKCG calendar
   
   
   var numValues = 0;
@@ -97,7 +87,7 @@ function sendToCalendar()
           //var eventEnd = new Date( date + " " + eTime);
           //var newTimedEvent = calendar.createEvent(newTitle, eventStart, eventEnd)
           
-          sheet.getRange(startRow + 1, 16).setValue(EVENT_CREATED); //mark as created
+          sheet.getRange(startRow, 16).setValue(EVENT_CREATED); //mark as created
         }
         else 
         {
