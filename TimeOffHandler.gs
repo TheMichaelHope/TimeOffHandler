@@ -42,9 +42,11 @@ function sendRequestResults()
         MailApp.sendEmail(emailAddress, subject, message);
         sheet.getRange(startRow, 9).setValue(EMAIL_SENT);
       }
-      else {startRow++;}
+      else
+        startRow++;
     }
-    else{startRow++;}
+    else
+      startRow++;
   }
 }
 
@@ -90,14 +92,10 @@ function sendToCalendar()
           sheet.getRange(startRow, 16).setValue(EVENT_CREATED); //mark as created
         }
         else 
-        {
          startRow++; //if created go to next row
-        }
       } 
-      else 
-      {
+      else
         startRow++;
-      }
     }
     numValues++;
   }
